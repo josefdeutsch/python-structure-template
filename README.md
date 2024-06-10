@@ -1,83 +1,125 @@
-# A template to structure your Python application
-A python project to use as a template when developing a Python application.
+# Financial Data Analysis and LSTM Modeling
 
-## In order to create a Python project with a similar structure you need to do the following: 
-### The structure of the project should be as follows: 
-```
-project
-├── README.md
-├── example
-│   ├── __init__.py
-│   ├── package_1
-│   │   ├── __init__.py
-│   │   ├── awesome_module.py
-│   │   ├── ...
-│   │   └── awesome_module_n.py
-│   └── package_2
-│       ├── __init__.py
-│       └── module.py
-├── setup.py
-└── tests
-    └── __init__.py
-```
-### (Optional) Create a Python environment: 
-* For Python3 users: 
-  * `pip install virtualenv`
-  * `virtualenv venv_name`
-  * `source path/to/venv_name activate`
-* For Anaconda users: 
-  * `conda create --name conda_env`
-  * `conda activate conda_env`
-  * `conda install pip`
+This script explores critical tools and techniques for effective financial data analysis using Python. From importing essential libraries to developing and visualizing LSTM models, it covers the fundamentals of handling, analyzing, and predicting financial data trends.
 
-### Next you need to create a `setup.py`  file in the root folder. It should be similar to the one presented below: 
-```
-from distutils.core import setup
-from setuptools import setup, find_packages
+Author: Nickolas Discolll  
+Date: May 8, 2024
 
-setup(
-    name='example',
-    version='0.1dev0',
-    author='Author Name', 
-    author_email='author_email@mail.com',
-    packages=find_packages(),
-    long_description=open('README.md').read()
-)
-```
-### You need to create an **`__init__.py`** file in the `/example` directory where you should **import the packages** (i.e. `package_1`, and `package_2`): 
-```
-# example/__init__.py
-from . import package_1, package_2 
-```
+## Overview
 
-### After that, you need to run the `setup.py` as follows: 
-#### While being in the root of the folder run the following command: `pip install -e .`
-An `example.egg-info` directory should now be created in the root directory: 
-```
-project
-├── README.md
-├── example
-│   ├── __init__.py
-│   ├── package_1
-│   │   ├── __init__.py
-│   │   ├── awesome_module.py
-│   │   ├── ...
-│   │   └── awesome_module_n.py
-│   └── package_2
-│       ├── __init__.py
-│       └── module.py
-├── example.egg-info
-│   ├── dependency_links.txt
-│   ├── PKG_INFO
-│   ├── SOURCES.txt
-│   └── top_level.txt
-├── setup.py
-└── tests
-    └── __init__.py
-```
-If everything when according to plan, you should be able to use the modules you developed in the `package_1` from the `package_2` directory likewise: 
+This script provides a comprehensive guide to financial data analysis and predictive modeling using Python. It includes the following steps:
+1. Importing historical stock data.
+2. Plotting stock prices.
+3. Calculating technical indicators.
+4. Plotting technical indicators.
+5. Creating a heatmap of correlations.
+6. Preparing training data for LSTM model.
+7. Building and compiling the LSTM model.
+8. Preparing testing data.
+9. Training the LSTM model.
+10. Making predictions and plotting results.
 
-```
-# example/package_2/module.py
-from example.package_1.awesome_module import hello
-```
+## Functions
+
+### `fetch_historical_data()`
+Fetches historical stock prices for the Nifty Bank index from Yahoo Finance.
+
+**Returns:**
+- `pd.DataFrame`: A dataframe containing the adjusted closing prices.
+
+### `plot_stock_price(data)`
+Plots the Bank Nifty price against the date.
+
+**Parameters:**
+- `data` (`pd.DataFrame`): A dataframe containing stock prices.
+
+### `get_technical_indicators(dataset)`
+Calculates various technical indicators for the dataset.
+
+**Parameters:**
+- `dataset` (`pd.DataFrame`): A dataframe containing stock prices.
+
+**Returns:**
+- `pd.DataFrame`: The dataframe with technical indicators added.
+
+### `plot_technical_indicators(dataset, last_days)`
+Plots technical indicators for the dataset.
+
+**Parameters:**
+- `dataset` (`pd.DataFrame`): A dataframe containing stock prices and technical indicators.
+- `last_days` (`int`): The number of days to plot.
+
+### `create_heatmap(df)`
+Creates a heatmap of the correlation matrix of the dataframe.
+
+**Parameters:**
+- `df` (`pd.DataFrame`): A dataframe containing stock prices and technical indicators.
+
+### `prepare_training_data(data, training_size=0.8)`
+Scales and prepares training data for the LSTM model.
+
+**Parameters:**
+- `data` (`pd.DataFrame`): A dataframe containing stock prices and technical indicators.
+- `training_size` (`float`): The proportion of the dataset to be used for training.
+
+**Returns:**
+- `np.ndarray`: Scaled training data inputs and outputs.
+- `MinMaxScaler`: Scaler used for normalizing the data.
+- `pd.DataFrame`: Testing data.
+
+### `build_lstm_model(input_shape)`
+Builds and compiles an LSTM model.
+
+**Parameters:**
+- `input_shape` (`tuple`): The shape of the input data.
+
+**Returns:**
+- `keras.models.Sequential`: The compiled LSTM model.
+
+### `prepare_testing_data(inputs, scaler)`
+Prepares testing data for the LSTM model.
+
+**Parameters:**
+- `inputs` (`pd.DataFrame`): The dataframe containing stock prices and technical indicators.
+- `scaler` (`sklearn.preprocessing.MinMaxScaler`): The scaler used for training data.
+
+**Returns:**
+- `np.ndarray`: Scaled testing data inputs and outputs.
+
+### `plot_predictions(y_test, y_pred)`
+Plots real vs predicted stock prices.
+
+**Parameters:**
+- `y_test` (`np.ndarray`): Real stock prices.
+- `y_pred` (`np.ndarray`): Predicted stock prices.
+
+### `main()`
+Main function to run the financial data analysis and LSTM modeling.
+
+## How to Use
+
+1. **Install Required Libraries**
+    Ensure you have the required libraries installed:
+    ```sh
+    pip install numpy pandas matplotlib seaborn pandas_datareader scikit-learn keras
+    ```
+
+2. **Run the Script**
+    Execute the script:
+    ```sh
+    python financial_data_analysis.py
+    ```
+
+3. **Understanding the Workflow**
+    - The script starts by fetching historical stock data.
+    - It then plots the stock prices to visualize the data.
+    - Technical indicators are calculated and added to the dataframe.
+    - These indicators are plotted to provide further insights.
+    - A heatmap of the correlation matrix is created.
+    - Training data is prepared and scaled.
+    - An LSTM model is built and compiled.
+    - The model is trained using the prepared data.
+    - Predictions are made on the test data.
+    - Finally, the real vs predicted stock prices are plotted for comparison.
+
+By following these steps, you can perform financial data analysis and predictive modeling using LSTM on the Nifty Bank index.

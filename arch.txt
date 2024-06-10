@@ -1,0 +1,24 @@
+project_root/
+├── src/
+│   ├── main/
+│   │   ├── ml/
+│   │   │   ├── data/
+│   │   │   │   ├── raw/
+│   │   │   │   ├── processed/
+│   │   │   │   └── external/
+│   │   │   ├── models/
+│   │   │   ├── notebooks/
+│   │   │   ├── scripts/
+│   │   │   └── utils/
+│   │   └── app/
+│   │       ├── controllers/
+│   │       ├── services/
+│   │       └── views/
+│   ├── test/
+│   │   ├── unit/
+│   │   ├── integration/
+│   │   └── ml/
+│   │       ├── data/
+│   │       ├── models/
+│   │       └── scripts/
+└── docs/

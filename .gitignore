@@ -1,4 +1,12 @@
-/.gitignore
-/__pycache__
-/*.egg-info
-/.vscode
+# Ignore virtual environment directory
+venv/
+.env
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore egg info directories
+*.egg-info/
+
+# Ignore Visual Studio Code settings directory
+.vscode/

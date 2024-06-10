@@ -2,10 +2,10 @@ from distutils.core import setup
 from setuptools import setup, find_packages
 
 setup(
-    name='example',
+    name='LSTM',
     version='0.1dev0',
-    author='Author Name', 
-    author_email='author_email@mail.com',
+    author='Josef', 
+    author_email='josephdeutsch3d@gmail.com',
     packages=find_packages(),
     long_description=open('README.md').read()
 )
